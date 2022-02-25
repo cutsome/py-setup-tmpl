@@ -1,0 +1,40 @@
+[tool.poetry]
+name = "salesnow-db-mart-batch"
+version = "0.1.0"
+description = ""
+authors = ["cutsome <nissikpu@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pydantic = {extras = ["dotenv"], version = "^1.9.0"}
+boto3 = "^1.20.49"
+SQLAlchemy = "^1.4.31"
+psycopg2 = "^2.9.3"
+pandas = "^1.4.0"
+psycopg = {extras = ["c"], version = "^3.0.8"}
+
+[tool.poetry.dev-dependencies]
+autoflake = "^1.4"
+bandit = "^1.7.2"
+flake8 = "^4.0.1"
+isort = "^5.10.1"
+mypy = "^0.931"
+pre-commit = "^2.17.0"
+sqlalchemy-stubs = "^0.4"
+black = "^22.1.0"
+pytest = "^7.0.1"
+pytest-cov = "^3.0.0"
+pytest-mock = "^3.7.0"
+pytest-postgresql = "^4.1.0"
+
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.isort]
+force_single_line = true
+profile = "black"
+
+[tool.bandit]
+skips = ["B608"]

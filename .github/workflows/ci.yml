@@ -1,0 +1,94 @@
+# name: CI
+
+# on:
+#   push:
+#     branches:
+#       - main
+#   pull_request:
+#     branches:
+#       - "**"
+
+# jobs:
+#   lint:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - uses: actions/checkout@v2
+
+#       - name: set up python
+#         uses: actions/setup-python@v2
+#         with:
+#           python-version: 3.9
+
+#       - name: install poetry
+#         shell: bash
+#         run: |
+#           curl -sL https://raw.githubusercontent.com/python-poetry/poetry/master/install-poetry.py \
+#             | python - -y
+#       - name: update path
+#         shell: bash
+#         run: echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+#       - name: configure poetry
+#         shell: bash
+#         run: poetry config virtualenvs.in-project true
+
+#       - name: set up cache
+#         uses: actions/cache@v2
+#         id: cache
+#         with:
+#           path: .venv
+#           key: venv-${{ hashFiles('**/poetry.lock') }}
+
+#       - name: install packages
+#         run: poetry install
+
+#       - name: install hodolint
+#         run: |
+#           mkdir $GITHUB_WORKSPACE/bin
+#           wget -O $GITHUB_WORKSPACE/bin/hadolint https://github.com/hadolint/hadolint/releases/download/v2.6.0/hadolint-Linux-x86_64
+#           chmod +x $GITHUB_WORKSPACE/bin/hadolint
+#           echo "$PATH:$GITHUB_WORKSPACE/bin/" >> $GITHUB_PATH
+#       - name: lint
+#         uses: pre-commit/action@v2.0.3
+
+#   test:
+#     name: test
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v2
+
+#       - name: set up python
+#         uses: actions/setup-python@v2
+#         with:
+#           python-version: 3.9
+
+#       - name: install poetry
+#         shell: bash
+#         run: |
+#           curl -sL https://raw.githubusercontent.com/python-poetry/poetry/master/install-poetry.py \
+#             | python - -y
+#       - name: update path
+#         shell: bash
+#         run: echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+#       - name: configure poetry
+#         shell: bash
+#         run: poetry config virtualenvs.in-project true
+
+#       - name: set up cache
+#         uses: actions/cache@v2
+#         id: cache
+#         with:
+#           path: .venv
+#           key: venv-${{ hashFiles('**/poetry.lock') }}
+
+#       - name: install packages
+#         run: poetry install
+
+#       - name: create .env
+#         shell: bash
+#         run: cp .env.test .env
+
+#       - name: test
+#         run: make test

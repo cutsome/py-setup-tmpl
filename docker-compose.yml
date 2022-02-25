@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgis/postgis:12-3.1
+    volumes:
+      - db-volume:/data/postgres
+      - ./sql:/docker-entrypoint-initdb.d
+      - ./sql/seeds:/seeds
+    environment:
+      POSTGRES_DB: ${DB_NAME:-app}
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-pass}
+      PGDATA: /data/postgres
+    networks:
+      - app-network
+
+  app:
+    build:
+      context: .
+    depends_on:
+      - db
+    env_file: .env
+    volumes:
+      - ./app:/app
+    tty: true
+    networks:
+      - app-network
+
+volumes:
+  db-volume:
+
+networks:
+  app-network:
+    driver: bridge
