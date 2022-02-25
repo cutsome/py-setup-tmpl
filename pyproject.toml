@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "salesnow-db-mart-batch"
+name = "py-setup-tmpl"
 version = "0.1.0"
 description = ""
 authors = ["cutsome <nissikpu@gmail.com>"]
